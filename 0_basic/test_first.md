@@ -47,12 +47,6 @@ def create():
 
 
 
-| title   | content | desc       | a        | b        | c        | d    | e    |
-| ------- | ------- | ---------- | -------- | -------- | -------- | ---- | ---- |
-| hi      | sdfalkj | jlksafjlk; | jasdlkfj | asdlkf;j | asd;lkfj |      |      |
-| jklsjad | dsjflk  | sadlkfj    | sdaflk;j | asdflkj  | asdflkjf |      |      |
-|         |         |            |          |          |          |      |      |
-
 
 
 ## CLI - terminal 명령어 학습
@@ -64,7 +58,74 @@ $ cd test  # test 디렉토리로 이동한다. Change Directory
 $ cd ..  # 한단계 위의 디렉토리로 이동한다.
 $ cd -  # 뒤로 가기
 $ cd ~  # home 으로 이동한다.
+$ rm a.txt  # a.txt 를 삭제한다.
+$ rm -r test/  # test/ 디렉토리를 삭제한다.
 $ ls  # LiSt 현재 디렉토리 안의 파일/디렉토리 목록을 표시한다.
 $ pwd  # 현재 내가 위치한 디렉토리를 표시한다. Present Working Directory
 ```
+
+
+
+## git 기초 명령
+
+```sh
+$ git init  # pwd 에서 git 으로 버젼관리 시작! (.git/ 를 만든다.)
+$ git remote add origin <remote url>  # 드라이브 등록
+
+## 여기까지는 한번만! ## 
+
+$ git add .  # 내 위치(.) 를 전체 등록 (사진 찍을 준비)
+
+$ git commit -m 'MESSAGE'  # 사진 찰칵 + 메시지
+
+## 계속 반복! add & commit ##
+
+$ git push origin master  # 드라이브 백업
+```
+
+```sh
+# 반드시 확인!!
+$ pwd
+/c/Users/student/TIL  # TIL 에 있는걸 확인하자!!
+
+# 수업 중간 중간
+$ git add .
+$ git commit -m '남길 메시지'
+# 적절한 타이밍에!
+
+# 집에가기 전에
+$ git push origin master
+```
+
+
+
+## 좌석표 작성
+
+### `bit.do/4th4deep`
+
+
+
+
+
+## Python 기초
+
+``
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
