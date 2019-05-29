@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-import requests
+from flask import Flask, render_template  # pip install requests
+import requests  # pip install requests
 import random
 import json
 
