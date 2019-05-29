@@ -48,6 +48,8 @@ def lotto(num):
     url = f'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={num}'
     res = requests.get(url).text  # type == String
     data = json.loads(res)  # type == dict
+    bonus_number = data['bnusNo']
+
     real_numbers = []
 
     if data['returnValue'] == 'success':
@@ -57,8 +59,32 @@ def lotto(num):
 
         real_numbers.sort()
 
-    # real_numbers => 실제 로또 번호 / luck_numbers => 랜덤 픽
+    # 등수 비교
+    lucky = set(lucky_numbers)
+    real = set(real_numbers)
 
+    match_count = len(real.intersection(lucky))
+
+    result = '꽝'
+    if match_count == 6:
+        result = 1
+    elif match_count == 5 and bonus_number in lucky_numbers:
+        result = 2
+    elif match_count == 5:
+        result = 3
+    elif match_count == 4:
+        result = 4
+    elif match_count == 3:
+        result = 5
+
+    return render_template(
+        'lotto.html',
+        result=result,
+        real_numbers=real_numbers,
+        lucky_numbers=lucky_numbers,
+        bonus=bonus_number,
+        winning=data['firstAccumamnt']
+    )
 
 @app.route('/square/<int:num>')
 def square(num):
