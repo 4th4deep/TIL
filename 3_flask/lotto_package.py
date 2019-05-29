@@ -44,3 +44,6 @@ def get_result(real_list, random_list, bonus):
         result = 5
 
     return result
+
+
+print(__name__)
