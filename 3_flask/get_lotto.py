@@ -1,0 +1,8 @@
+import requests
+import json
+
+url = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=859'
+data = requests.get(url).text
+lotto_data = json.loads(data)
+
+print(lotto_data['firstWinamnt'])
