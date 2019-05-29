@@ -1,7 +1,23 @@
-real_numbers = [1, 2, 3, 4, 5, 6]
-bonus_number = 7
+real_numbers = set([1, 2, 3, 4, 5, 6])
+bonus_number = 8
 
-lucky_numbers = [1, 2, 3, 4, 5, 7]
+lucky_numbers = set([1, 2, 3, 4, 5, 6])
+
+match_count = len(real_numbers.intersection(lucky_numbers))
+
+if match_count == 6:
+    print(1)
+elif match_count == 5 and bonus_number in lucky_numbers:
+    print(2)
+elif match_count == 5:
+    print(3)
+elif match_count == 4:
+    print(4)
+elif match_count == 3:
+    print(5)
+else:
+    print('꽝')
+
 
 # real 과 lucky 가
 # 1등: 6개가 같다.
