@@ -40,6 +40,24 @@ def get_lotto(num):
     )
 
 
+@app.route('/lotto/<int:num>')
+def lotto(num):
+    lucky_numbers = random.sample(range(1, 46), 6)
+    lucky_numbers.sort()
+
+    url = f'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={num}'
+    res = requests.get(url).text  # type == String
+    data = json.loads(res)  # type == dict
+    real_numbers = []
+
+    if data['returnValue'] == 'success':
+        for key, value in data.items():
+            if 'drwtNo' in key:
+                real_numbers.append(value)
+
+        real_numbers.sort()
+
+    # real_numbers => 실제 로또 번호 / luck_numbers => 랜덤 픽
 
 
 @app.route('/square/<int:num>')
