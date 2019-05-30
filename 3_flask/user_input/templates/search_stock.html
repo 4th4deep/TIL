@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Stock Quote</title>
+</head>
+<body>
+<nav>
+    <ul>
+        <li><a href="/">Main</a></li>
+        <li><a href="/search_stock">Search</a></li>
+    </ul>
+</nav>
+<h1>Search Stock Quote</h1>
+<form action="/search_result">
+    <input name="keyword" type="text" placeholder="Enter Stock code" autofocus>
+    <input type="submit" value="Search">
+</form>
+
+{% if not is_first_search %}
+    <section>
+        {% if is_success %}
+            <p>{{ c_name }} $ {{ l_price }}</p>
+        {% else %}
+            <p>해당 주식 정보를 검색할 수 없습니다.</p>
+        {% endif %}
+    </section>
+{% endif %}
+</body>
+</html>
