@@ -3,5 +3,15 @@
 {% block title %} {% endblock %}
 
 {% block body %}
-<h1>{{ company_code }}</h1>
+<h1>Result</h1>
+
+{% if is_ok %}
+<p>
+    {{ data }}
+</p>
+{% else %}
+<p>
+    {{ message }}
+</p>
+{% endif %}
 {% endblock %}

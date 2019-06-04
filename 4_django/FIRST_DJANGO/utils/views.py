@@ -24,7 +24,7 @@ def stock_input(request):
 def stock_output(request):
     from iexfinance.stocks import Stock
 
-    company_code = request.POST.get('company_code')
+    company_code = request.GET.get('company_code')
     TOKEN = 'pk_34947d6f20564c52a9dcd62bf4d4ab5f'
 
     try:
