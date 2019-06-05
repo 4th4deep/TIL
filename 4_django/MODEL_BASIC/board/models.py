@@ -1,6 +1,6 @@
 from django.db import models
 
-
+# Model Template View
 class Article(models.Model):
     # id = Primary Key
     title = models.CharField(max_length=200)
