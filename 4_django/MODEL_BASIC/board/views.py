@@ -32,3 +32,13 @@ def article_detail(request, article_id):  # 특정 article 조회하기
     return render(request, 'board/article_detail.html', {
         'article': article,
     })
+
+
+# TODO: Update
+
+
+# Delete
+def delete_article(request, article_id):
+    article = Article.objects.get(id=article_id)
+    article.delete()
+    return redirect('/board/')
