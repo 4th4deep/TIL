@@ -34,7 +34,17 @@ def article_detail(request, article_id):  # 특정 article 조회하기
     })
 
 
-# TODO: Update
+# Update
+def edit_article(request, article_id):
+    article = Article.objects.get(id=article_id)
+    return render(request, 'board/edit_article.html', {
+        'article': article,
+    })
+
+
+def update_article(request, article_id):
+    # 이렇이렇게 한다.
+    pass
 
 
 # Delete
