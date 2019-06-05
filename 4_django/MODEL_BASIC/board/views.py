@@ -9,11 +9,14 @@ def new_article(request):
 
 # SAVE new article
 def create_article(request):
-    article = Article()
-    article.title = request.GET.get('title')
-    article.content = request.GET.get('content')
-    article.save()
-    return redirect(f'/board/{article.id}')
+    if request.method == 'POST':
+        article = Article()
+        article.title = request.POST.get('title')
+        article.content = request.POST.get('content')
+        article.save()
+        return redirect(f'/board/{article.id}')
+    else:
+        return redirect('/board/new/')
 
 
 # Read all
@@ -43,8 +46,15 @@ def edit_article(request, article_id):
 
 
 def update_article(request, article_id):
-    # 이렇이렇게 한다.
-    pass
+    if request.method == 'POST':
+        article = Article.objects.get(id=article_id)
+        article.title = request.POST.get('title')
+        article.content = request.POST.get('content')
+        article.save()
+        return redirect(f'/board/{article.id}')
+    else:
+        return redirect(f'/board/{article_id}/edit/')
+
 
 
 # Delete

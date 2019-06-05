@@ -3,7 +3,8 @@
 {% block body %}
 <h1>Edit Article</h1>
 
-<form action="/board/{{ article.id }}/update" method="GET">
+<form action="/board/{{ article.id }}/update/" method="POST">
+    {% csrf_token %}
     <div>
         제목: <input type="text" name="title" value="{{ article.title }}">
     </div>
