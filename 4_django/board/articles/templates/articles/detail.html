@@ -19,9 +19,12 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-{% for comment in article.comment_set.all %}
-    <div class="alert alert-primary" role="alert">
-      {{comment.content}}
-    </div>
-{% endfor %}
+<div class="my-3">
+    {% for comment in article.comment_set.all %}
+        <div class="alert alert-primary d-flex justify-content-between" role="alert">
+            {{comment.user}} : {{comment.content}}
+            <a class="btn btn-outline-danger" href="{% url 'articles:comment_delete' article.id comment.id %}" role="button">삭제</a>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

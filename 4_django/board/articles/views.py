@@ -23,6 +23,7 @@ def create(request):
         article = Article()
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
+        article.user = request.user
         article.save()
         return redirect('articles:detail', article.id)
     else:
@@ -61,6 +62,16 @@ def comment_create(request, article_id):
     article = Article.objects.get(id=article_id)
     comment.content = request.POST.get('content')
     comment.article = article
+    comment.user = request.user
     comment.save()
 
     return redirect("articles:detail", article_id)
+
+def comment_delete(request, article_id, comment_id):
+    comment = Comment.objects.get(id=comment_id)
+    comment.delete()
+    return redirect("articles:detail", article_id)
+
+def comment_all(request):
+    return render(request, 'articles/comment_all.html')
+
