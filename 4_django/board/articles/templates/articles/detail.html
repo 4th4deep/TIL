@@ -9,4 +9,19 @@
             <a class="btn btn-warning" href="{% url 'articles:update' article.id %}">수정</a>
     </div>
 </div>
+
+<form action="{% url 'articles:comment_create' article.id %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="comment">댓글작성</label>
+        <input type="text" class="form-control" id="comment" placeholder="댓글작성해주세요" name="content">
+    </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% for comment in article.comment_set.all %}
+    <div class="alert alert-primary" role="alert">
+      {{comment.content}}
+    </div>
+{% endfor %}
 {% endblock %}

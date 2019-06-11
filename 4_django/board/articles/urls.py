@@ -19,5 +19,6 @@ urlpatterns = [
     # path('<int:article_id>/edit/', views.edit, name="edit"),
     path('<int:article_id>/update/', views.update, name="update"),
 
+    path('<int:article_id>/comments/create/', views.comment_create, name="comment_create"),
 ]
 

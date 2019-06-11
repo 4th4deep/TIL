@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Article
+from .models import Article, Comment
 # Create your views here.
 def index(request):
     articles = Article.objects.all()
@@ -55,3 +55,12 @@ def update(request, article_id):
             'article': article
         }
         return render(request, 'articles/form.html', context)
+
+def comment_create(request, article_id):
+    comment = Comment()
+    article = Article.objects.get(id=article_id)
+    comment.content = request.POST.get('content')
+    comment.article = article
+    comment.save()
+
+    return redirect("articles:detail", article_id)
