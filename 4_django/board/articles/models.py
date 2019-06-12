@@ -7,6 +7,12 @@ class Article(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content2 = models.TextField()
+    content3 = models.TextField()
+    content4 = models.TextField()
+    content5 = models.TextField()
+    content6 = models.TextField()
+    content7 = models.TextField()
 
 class Comment(models.Model):
     content = models.TextField()
