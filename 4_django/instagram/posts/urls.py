@@ -8,4 +8,6 @@ urlpatterns = [
     path('', views.index, name="index"),
     # Create - 포스트 작성하기
     path('create/', views.create, name="create"),
+    # Update - 포스트 수정하기
+    path('<int:post_id>/update/', views.update, name="update"),
 ]

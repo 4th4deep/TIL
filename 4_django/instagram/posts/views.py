@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import PostForm
+from .models import Post
 
 # Create your views here.
 def index(request):
-    return render(request, 'posts/index.html')
+    posts = Post.objects.all()
+    context = {
+        'posts':posts
+    }
+    return render(request, 'posts/index.html', context)
 
 def create(request):
     # 1. get방식으로 데이터를 입력할 수 있는 form을 요청한다.
@@ -31,4 +36,23 @@ def create(request):
     }
     # 3. 만들어진 form을 create.html에 담아서 전송
     # 8. 사용자가 정확하게 입력한 데이터를 유지한 상태의 form을 전송
-    return render(request, 'posts/create.html', context)
+    return render(request, 'posts/form.html', context)
+
+def update(request, post_id):
+    post = Post.objects.get(id=post_id)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect("posts:index")
+        else:
+            pass
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'posts/form.html', {'form':form})
+
+
+
+
+
+
