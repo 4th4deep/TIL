@@ -4,7 +4,7 @@ from .models import Post
 
 # Create your views here.
 def index(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-id')
     context = {
         'posts':posts
     }
@@ -17,7 +17,7 @@ def create(request):
     if request.method == "POST":
         # 5. 데이터를 받아서 PostForm을 인스턴스화 한다.
         # 10. 데이터를 받아서 PostForm을 인스턴스화 한다.
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         # 6. 데이터 검증을 한다.
         # 11. 데이터 검증을 한다.
         if form.is_valid():
