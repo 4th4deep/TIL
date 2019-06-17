@@ -74,3 +74,18 @@ def comment_create(request, post_id):
             comment.post = post
             comment.save()
             return redirect('posts:index')
+
+
+@login_required
+def likes(request, post_id):
+    user = request.user
+    post = Post.objects.get(id=post_id)
+    # 이미 좋아요가 눌려졌으면
+    if user in post.like_users.all():
+        # 좋아요 취소
+        post.like_users.remove(user)
+    # 좋아요 안했으면
+    else:
+        # 좋아요 추가
+        post.like_users.add(user)
+    return redirect("posts:index")

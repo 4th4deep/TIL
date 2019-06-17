@@ -14,4 +14,7 @@ urlpatterns = [
 
     # Comment_create
     path('<int:post_id>/comments/create/', views.comment_create, name="comment_create"),
+
+    # like
+    path('<int:post_id>/likes/', views.likes, name="likes"),
 ]
