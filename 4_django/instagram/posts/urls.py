@@ -11,4 +11,7 @@ urlpatterns = [
     path('create/', views.create, name="create"),
     # Update - 포스트 수정하기
     path('<int:post_id>/update/', views.update, name="update"),
+
+    # Comment_create
+    path('<int:post_id>/comments/create/', views.comment_create, name="comment_create"),
 ]

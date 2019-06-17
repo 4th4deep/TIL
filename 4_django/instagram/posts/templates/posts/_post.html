@@ -1,3 +1,4 @@
+{% load bootstrap4 %}
 <div class="card col-6 my-3">
     {% if post.image %}
         <img src="{{post.image.url}}" class="card-img-top" alt="...">
@@ -6,8 +7,29 @@
     {% endif %}
     <div class="card-body">
     <!--    <h5 class="card-title">Card title</h5>-->
-        <p class="card-text">{{post.content}}</p>
+        <p class="card-text"><strong>{{post.user.username}}</strong> {{post.content}}</p>
         <!--    <a href="#" class="btn btn-primary">Go somewhere</a>-->
-        <a class="btn btn-warning" href="{% url 'posts:update' post.id %}">수정</a>
+        {% if post.user == user %}
+            <a class="btn btn-warning" href="{% url 'posts:update' post.id %}">수정</a>
+        {% endif %}
     </div>
+    <!--  댓글출력 시작  -->
+    <div class="card-body">
+        {% for comment in post.comment_set.all %}
+            <p><strong>{{comment.user.username}}</strong> {{comment.content}}</p>
+        {% empty %}
+            <p>댓글이 없습니다 ㅠㅠ</p>
+        {% endfor %}
+    </div>
+    <!--  댓글 출력 끝  -->
+    <!--  댓글 폼 시작  -->
+    <div class="card-body">
+        <form action="{% url 'posts:comment_create' post.id %}" method="post">
+            {% csrf_token %}
+            {% bootstrap_form comment_form %}
+            {% bootstrap_field comment_form.content show_label=False %}
+            <input type="submit">
+        </form>
+    </div>
+    <!--  댓글 폼 끝  -->
 </div>
