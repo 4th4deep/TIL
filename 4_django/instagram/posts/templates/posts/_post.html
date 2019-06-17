@@ -26,8 +26,9 @@
     <div class="card-body">
         <form action="{% url 'posts:comment_create' post.id %}" method="post">
             {% csrf_token %}
-            {% bootstrap_form comment_form %}
+            {# bootstrap_form comment_form #}
             {% bootstrap_field comment_form.content show_label=False %}
+
             <input type="submit">
         </form>
     </div>

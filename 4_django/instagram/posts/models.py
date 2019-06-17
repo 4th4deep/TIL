@@ -15,7 +15,8 @@ class Post(models.Model):
                 options={'quality': 90}
     )
 
+
 class Comment(models.Model):
-    content = models.TextField()
+    content = models.CharField(max_length=100)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
