@@ -42,7 +42,19 @@ def user_page(request, user_id):
     return render(request, 'accounts/user_page.html', context)
 
 def follow(request, user_id):
-    pass
+    me = request.user
+    you = User.objects.get(id=user_id)
+
+    if me != you:
+        # if you in me.follow.all():
+        #     me.follow.remove(you)
+        # else:
+        #     me.follow.add(you)
+        if me in you.follower.all():
+            you.follower.remove(me)
+        else:
+            you.follower.add(me)
+    return redirect('accounts:user_page', user_id)
 
 
 
