@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from .forms import PostForm, CommentForm
 from .models import Post
 from django.contrib.auth.decorators import login_required
+from itertools import chain
 
 # Create your views here.
+@login_required
 def index(request):
-    user = request.user
-    posts = Post.objects.filter(user__in=user.follow.all())
+    user_follow = request.user.follow.all()
+    follow_list = chain(user_follow, [request.user])
+    posts = Post.objects.order_by('-id').filter(user__in=follow_list)
     comment_form = CommentForm()
     context = {
         'posts': posts,
