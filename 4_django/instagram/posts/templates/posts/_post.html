@@ -16,9 +16,9 @@
         <p class="card-text"><strong><a href="{% url 'accounts:user_page' post.user.id %}">{{post.user.username}}</a></strong> {{post|hashtag_link|safe}}</p>
         <!--    <a href="#" class="btn btn-primary">Go somewhere</a>-->
         {% if user in post.like_users.all %}
-            <a href="{% url 'posts:likes' post.id %}"><i class="fas fa-heart" style="color:#ed4956"></i></a>
+            <i class="fas fa-heart" style="color:#ed4956" data-id="{{post.id}}"></i>
         {% else %}
-            <a href="{% url 'posts:likes' post.id %}"><i class="far fa-heart" style="color:black"></i></a>
+            <i class="far fa-heart" style="color:black" data-id="{{post.id}}"></i>
         {% endif %}
         {% if post.user == user %}
             <a class="btn btn-warning" href="{% url 'posts:update' post.id %}">수정</a>

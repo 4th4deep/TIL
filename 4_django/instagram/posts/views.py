@@ -3,6 +3,7 @@ from .forms import PostForm, CommentForm
 from .models import Post, HashTag
 from django.contrib.auth.decorators import login_required
 from itertools import chain
+from django.http import JsonResponse
 
 # Create your views here.
 @login_required
@@ -122,11 +123,17 @@ def likes(request, post_id):
     if user in post.like_users.all():
         # 좋아요 취소
         post.like_users.remove(user)
+        is_like = False
     # 좋아요 안했으면
     else:
         # 좋아요 추가
         post.like_users.add(user)
-    return redirect("posts:index")
+        is_like = True
+    context ={
+        'is_like': is_like
+    }
+    return JsonResponse(context)
+    # return redirect("posts:index")
 
 def hashtags(request, hashtag_id):
     hashtag = HashTag.objects.get(id=hashtag_id)
@@ -139,3 +146,7 @@ def hashtags(request, hashtag_id):
         'hashtag':hashtag
     }
     return render(request, 'posts/index.html', context)
+
+def javascript(request):
+
+    return render(request, 'posts/js.html')
