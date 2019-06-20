@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import PostForm, CommentForm
-from .models import Post
+from .models import Post, HashTag
 from django.contrib.auth.decorators import login_required
 from itertools import chain
 
@@ -42,6 +42,19 @@ def create(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+
+            # 해시태그 추가
+            content = form.cleaned_data.get('content')
+            words = content.split()
+
+            for word in words:
+                if word[0] == "#":
+                    # 해시태그 생성
+                    hashtag = HashTag.objects.get_or_create(content=word)
+                    print(hashtag)
+                    # post 모델과 연결
+                    post.hashtags.add(hashtag[0])
+
             return redirect("posts:index")
         else:
             # 7. 적절하지 않은 데이터가 들어온다.
@@ -66,6 +79,18 @@ def update(request, post_id):
             form = PostForm(request.POST, instance=post)
             if form.is_valid():
                 form.save()
+
+                # 기존의 M:N관계를 삭제
+                post.hashtags.clear()
+                # 해시태그 추가
+                content = form.cleaned_data.get('content')
+                words = content.split()
+                for word in words:
+                    if word[0] == "#":
+                        hashtag = HashTag.objects.get_or_create(content=word)
+                        print(hashtag)
+                        post.hashtags.add(hashtag[0])
+
                 return redirect("posts:index")
             else:
                 pass
@@ -102,3 +127,15 @@ def likes(request, post_id):
         # 좋아요 추가
         post.like_users.add(user)
     return redirect("posts:index")
+
+def hashtags(request, hashtag_id):
+    hashtag = HashTag.objects.get(id=hashtag_id)
+    posts = hashtag.post_set.all()
+
+    comment_form = CommentForm()
+    context = {
+        'posts': posts,
+        'comment_form': comment_form,
+        'hashtag':hashtag
+    }
+    return render(request, 'posts/index.html', context)

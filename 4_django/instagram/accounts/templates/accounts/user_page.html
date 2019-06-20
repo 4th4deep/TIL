@@ -7,6 +7,7 @@
         {% if user_info.image %}
             <img src="{{user_info.image.url}}" alt="profile_image" class="rounded-circle">
         {% else %}
+            <p>{{user}}</p>
             <img src="https://picsum.photos/id/{{user_info.id}}/150/150" alt="..." class="rounded-circle">
         {% endif %}
     </div>

@@ -39,6 +39,7 @@ def user_page(request, user_id):
     context = {
         'user_info': user_info
     }
+    # print(request.user.socialaccount_set.first().extra_data.get('properties').get('profile_image'))
     return render(request, 'accounts/user_page.html', context)
 
 def follow(request, user_id):
