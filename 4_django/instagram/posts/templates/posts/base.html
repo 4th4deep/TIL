@@ -44,6 +44,9 @@
                 const postId = e.target.dataset.id
                 axios.get(`/posts/${postId}/likes/`)
                 .then(function(res){
+                    console.log(res)
+                    const likeCount = document.querySelector(`#like-count-${postId}`)
+                    likeCount.innerText = res.data.like_count
                     if(res.data.is_like){
                         e.target.classList.remove('far')
                         e.target.classList.add('fas')

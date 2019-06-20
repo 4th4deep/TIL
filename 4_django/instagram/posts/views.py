@@ -129,8 +129,11 @@ def likes(request, post_id):
         # 좋아요 추가
         post.like_users.add(user)
         is_like = True
+
+    like_count = post.like_users.count()
     context ={
-        'is_like': is_like
+        'is_like': is_like,
+        'like_count': like_count
     }
     return JsonResponse(context)
     # return redirect("posts:index")
